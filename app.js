@@ -1,7 +1,8 @@
 const express = require('express');
 
-const app = express();
+const serverPort = require("./config/staticVals.json")['server_port'];
 
+const app = express();
 
 
 app.use("/", (req, res, next) => {
@@ -9,4 +10,7 @@ app.use("/", (req, res, next) => {
 })
 
 
-app.listen(3000, ()=>{ console.log(`server running ar port ${3000}`) } );
+app.listen(
+    serverPort, 
+    () => console.log(`server running at port ${serverPort}`)
+);
