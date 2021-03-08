@@ -1,11 +1,11 @@
 # News Backend Code
 
 ## TODO List
-- [ ] Design DB Layer Schema
+- [x] Design DB Layer Schema
 - [ ] Design DB Layer Layer
 - [ ] Router Layer
 - [ ] Authenticaion
-
+- [ ] API test in mocha
 
 ### DB Layer
 1. User
@@ -29,6 +29,8 @@
 4. News Article
     - News Id
     - News Title
+    - News Category id (Foreign Key to NewsCategory )
+    - News Total Visits
     - News Static Link 
         - ( Details stored in static file as json )
     ----------------------
