@@ -1,4 +1,4 @@
 {
     "server_port": 3000,
-    "db_port": "TBD"
+    "db_port": "mongodb://localhost/ead"
 }

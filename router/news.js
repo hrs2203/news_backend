@@ -1,11 +1,5 @@
-const express = require('express');
-var router = express.Router();
+const router = require('express').Router();
 
-/*
-"news/<newsId>": "news/<newsId> news",
-"news/catrgory/<categoryId>": "news list category wise",
-"news/catrgory/all": "list category"
-*/
 
 router.get("/", (req, res, next) => {
     return res.json({
