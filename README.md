@@ -1,9 +1,13 @@
 # News Backend Code
 
+## DB Layer Details
+Connected to ead db in mongo::local
+
 ## TODO List
 - [x] Design DB Layer Schema
-- [ ] Design DB Layer Layer
-- [ ] Router Layer
+- [x] DB connection
+- [x] Design DB Layer Layer
+- [x] Router Layer
 - [ ] Authenticaion
 - [ ] API test in mocha
 
