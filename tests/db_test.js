@@ -1,4 +1,4 @@
-const userObj = require("../database/db/user_module.js");
+const ncd = require("../database/db/news_category_module.js");
 const mongoose = require("mongoose");
 const serverPort = require("../config/staticVals.json")
 
@@ -13,24 +13,26 @@ mongoose.connect(
 },
     () => {
         console.log("Connected to db layer");
-        var em = "jam@gmail.com"
-        userObj.checkUserPresence(em)
-            .then(userPresence => {
-                if (userPresence === false) {
-                    userObj.createNewUser("james", em, "JamesPwd123")
-                    .then( (data) => {
-                        console.log("user Created");
-                        console.log(data);
-                        console.log("All User Data");
-                        userObj.getAllUser()
-                            .then(data => console.log(data));
-                    })
-                    .catch(err => `Error While Creating user \n\n ${err}`);
-                }else{
-                    console.log("user Already Present");
-                    console.log(userPresence);
-                }
-            })
-            .catch(err => console.log(err))
+        
+        ncd.createNewNewsCategory("universal news for allplanet")
+            .then(newObj => {
+                console.log(newObj);
+                ncd.getAllNewsCategory().then(data => {
+                    console.log(data)
+                }).catch(err => {
+                    console.log("reading error");
+                });
+            }).catch(err => {
+                console.log("reading error");
+            });
+        // ncd.getAllNewsCategory().then(data => {
+        //     console.log(data)
+        // }).catch(err => {
+        //     console.log("reading error");
+        // });
+
+
     }
 );
+
+

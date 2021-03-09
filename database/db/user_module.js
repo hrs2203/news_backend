@@ -1,3 +1,4 @@
+const user = require("../models/user.js");
 const User = require("../models/user.js");
 
 
@@ -15,21 +16,27 @@ class UserDB {
     }
 
     static createNewUser(userName, email, password) {
-        const newUser = new User({
-            "user_name": userName,
-            "email": email,
-            "password": password,
-        });
+        return UserDB.checkUserPresence(email)
+            .then(userObj => {
+                if (userObj === false) {
+                    const newUser = new User({
+                        "user_name": userName,
+                        "email": email,
+                        "password": password,
+                    });
 
-        return newUser.save()
-            .then(data => data)
-            .catch(err => err);
+                    return newUser.save()
+                        .then(data => data).catch(err => err);
+                }
+                return userObj;
+            })
+            .catch(err => err)
     }
 
     static validateUser(user_email, user_password) {
-        return User.findOne({ "email": user_email })
+        return UserDB.checkUserPresence(user_email)
             .then(userObj => {
-                if (userObj === null) {
+                if (userObj === false) {
                     return ({
                         "status": false,
                         "message": "Invalid email id"
@@ -45,7 +52,8 @@ class UserDB {
                     "status": false,
                     "message": "Invalid password"
                 });
-            }).catch(err => err);
+            })
+            .catch(err => err)
     }
 
 

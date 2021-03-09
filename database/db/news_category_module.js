@@ -20,14 +20,14 @@ class NewsCategoryDB {
     }
 
     static createNewNewsCategory(nc_name) {
-        return NewsCategory.checkNewsCategoryPresence(nc_name)
+        return NewsCategoryDB.checkNewsCategoryPresence(nc_name)
             .then(ncObj => {
                 if (ncObj === false) {
                     const newNewsCategoryObj = new NewsCategory({
                         "news_category_name": nc_name
                     });
 
-                    newNewsCategoryObj.save()
+                    return newNewsCategoryObj.save()
                         .then(newObj => newObj)
                         .catch(err => err);
                 }

@@ -7,6 +7,12 @@ class NewsDB {
         return News.find().then(data => data).catch(err => err);
     }
 
+    static getNews(news_id) {
+        return News.findOne({ "_id": news_id })
+            .then(newsObj => (newsObj === null) ? false : newsObj)
+            .catch(err => err);
+    }
+
     static checkNewsPresence(news_id) {
         return News.findOne({ "_id": news_id })
             .then(newsObj => (newsObj === null) ? false : newsObj)
@@ -23,7 +29,7 @@ class NewsDB {
                     });
                 }
 
-                return newsObj.update({
+                return newsObj.updateOne({
                     "news_total_visits": newsObj.news_total_visits + increment_factor
                 }).then(data => data).catch(err => err);
             })
