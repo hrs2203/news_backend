@@ -56,9 +56,9 @@ router.post("/auth/registration", parseJsonInput,
 
 // TODO: Add URL Parsing.
 router.get("/", (req, res, next) => {
-    const userEmail = req.query.email;
+    // const userEmail = req.query.email;
 
-    return UserDB.checkUserPresence(userEmail)
+    return UserDB.checkUserPresence(req.query.userEmail)
         .then(userData => {
             if (userData === false) {
                 return res.json({

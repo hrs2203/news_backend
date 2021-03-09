@@ -58,7 +58,7 @@ router.post("/add", parseJsonInput,
     });
 
 router.get("/category", (req, res, next) => {
-    // req.query.ncid === cat name
+    // req.query.ncid === cat id
     return NewsCategoryDB.checkNewsCategoryPresenceById(req.query.ncid)
         .then(newCategoryObj => {
             if (newCategoryObj === false) {

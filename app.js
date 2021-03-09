@@ -23,6 +23,8 @@ const app = express();
 
 app.use("/api", server_router);
 
+app.use("/static", express.static('./static') );
+
 app.listen(
     serverPort['server_port'], () => { 
         console.log(`server running at port ${serverPort["server_port"]}`)
