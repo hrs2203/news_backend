@@ -3,16 +3,12 @@ const parseJsonInput = require("body-parser").json();
 
 const UserDB = require("../database/db/user_module.js");
 const UserDetailDB = require("../database/db/user_detail_module.js");
-const { response } = require('express');
 
 
-router.post("/auth/login",
-    parseJsonInput,
+router.post("/auth/login", parseJsonInput,
     (req, res, next) => {
-        const email = req.body.email;
-        const password = req.body.password;
 
-        return UserDB.validateUser(email, password)
+        return UserDB.validateUser(req.body.email, req.body.password)
             .then(validationResp => {
                 return res.json({
                     "statusCode": 200,
@@ -28,17 +24,28 @@ router.post("/auth/login",
 
 router.post("/auth/registration", parseJsonInput,
     (req, res, next) => {
-        const username = req.body.username;
-        const email = req.body.email;
-        const password = req.body.password;
-
-        return UserDB.createNewUser(username, email, password)
+        return UserDB.createNewUser(req.body.username, req.body.email, req.body.password)
             .then(creationResp => {
-                return res.json({
-                    "statusCode": 200,
-                    "data": creationResp
-                });
+                return UserDetailDB.createNewUserDetail(creationResp._id)
+                    .then(detObj => {
+                        return res.json({
+                            "statusCode": 200,
+                            "data": {
+                                "user": creationResp,
+                                "user_detail": detObj
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        return res.json({
+                            "statusCode": 400,
+                            "data": err
+                        });
+                    });
+
             }).catch(err => {
+                console.log(err);
                 return res.json({
                     "statusCode": 400,
                     "data": err
@@ -46,33 +53,38 @@ router.post("/auth/registration", parseJsonInput,
             })
     });
 
-router.get("/",
-    (req, res, next) => {
-        const userEmail = req.query.email;
 
-        return UserDB.checkUserPresence(userEmail)
-            .then(userData => {
-                if (userData === false){
+// TODO: Add URL Parsing.
+router.get("/", (req, res, next) => {
+    const userEmail = req.query.email;
+
+    return UserDB.checkUserPresence(userEmail)
+        .then(userData => {
+            if (userData === false) {
+                return res.json({
+                    "statusCode": 200,
+                    "data": null
+                });
+            }
+            return UserDetailDB.checkUserDetailPresence(userData._id)
+                .then(detailObj => {
                     return res.json({
                         "statusCode": 200,
-                        "data": null
+                        "data": {
+                            "user": userData,
+                            "user_detail": detailObj
+                        }
                     });
-                }
-                return res.json({
-                    "statusCode": 200,
-                    "data": userData
-                });
-            })
-            .catch(err => {
-                return res.json({
-                    "statusCode": 400,
-                    "data": err
-                });
-            })
+                })
+        })
+        .catch(err => {
+            return res.json({
+                "statusCode": 400,
+                "data": err
+            });
+        })
 
-
-        
-    });
+});
 
 
 module.exports = router;

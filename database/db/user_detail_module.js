@@ -29,7 +29,7 @@ class UserDetailDB {
     }
 
     static createNewUserDetail(user_object_id) {
-        return UserDetail.checkUserDetailPresence(user_object_id)
+        return UserDetailDB.checkUserDetailPresence(user_object_id)
             .then(userDetailObject => {
                 if (userDetailObject === false) {
                     const newUserDetail = new UserDetail({

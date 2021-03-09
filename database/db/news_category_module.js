@@ -4,7 +4,7 @@ const NewsCategory = require("../models/news_category.js");
 class NewsCategoryDB {
 
     static getAllNewsCategory() {
-        return NewsCategory.find().then(data => data).catch(err => err);
+        return NewsCategory.find().select("news_category_name").then(data => data).catch(err => err);
     }
 
     static checkNewsCategoryPresence(nc_name) {
