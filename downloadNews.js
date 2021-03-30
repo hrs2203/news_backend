@@ -40,24 +40,24 @@ function calldata(topic, startData, endDate, destincation) {
   })
 }
 
-calldata(
-  "marvel", '2021-03-01', '2021-03-25',
-  "./static/news_file/ent/file1.json"
-)
+// calldata(
+//   "summer", '2021-03-01', '2021-03-25',
+//   "./static/news_file/othe/file1.json"
+// )
 
-calldata(
-  "demon slayer", '2021-03-01', '2021-03-25',
-  "./static/news_file/ent/file2.json"
-)
+// calldata(
+//   "corona", '2021-03-01', '2021-03-25',
+//   "./static/news_file/othe/file2.json"
+// )
 
-calldata(
-  "my hero academia", '2021-03-01', '2021-03-25',
-  "./static/news_file/ent/file3.json"
-)
+// calldata(
+//   "russia", '2021-03-01', '2021-03-25',
+//   "./static/news_file/othe/file3.json"
+// )
 
-calldata(
-  "fast and furious", '2021-03-01', '2021-03-25',
-  "./static/news_file/ent/file4.json"
-)
+// calldata(
+//   "thailand", '2021-03-01', '2021-03-25',
+//   "./static/news_file/othe/file4.json"
+// )
 
 
