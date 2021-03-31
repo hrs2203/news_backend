@@ -14,7 +14,12 @@ folderName.forEach(fold => {
     fileContent = JSON.parse(fileContent);
 
     for (let ind = 0; ind < fileContent.length; ind++) {
-      list_data.push(fileContent[ind]["title"])
+      list_data.push({
+        "title": fileContent[ind]["title"],
+        "url": fileContent[ind]["url"],
+        "author": fileContent[ind]["author"],
+        "publishedAt": fileContent[ind]["publishedAt"]
+      })
     }
 
   })
