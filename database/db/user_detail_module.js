@@ -9,17 +9,26 @@ class UserDetailDB {
             .catch(err => err);
     }
 
-    static updateUserDetail(user_object_id, news_cat_id, incrementFactor) {
+    /**
+     * 
+     * @param {String} user_object_id 
+     * @param {Object} news_token
+     * @returns neuly update user history
+     * 
+     * news_token: {
+     *  "news_title": String,
+     *  "news_link": String,
+     *  "news_time": String,
+     *  "news_category": String
+     * }
+     */
+    static updateUserDetail(user_object_id, news_token) {
         return UserDetail.findOne({ "user_id": user_object_id })
             .then(userObj => {
                 if (userObj === null) false;
 
                 var objVisitHistory = userObj['user_visit_history'];
-                if (objVisitHistory[news_cat_id] === undefined) {
-                    objVisitHistory[news_cat_id] = incrementFactor;
-                } else {
-                    objVisitHistory[news_cat_id] += incrementFactor;
-                }
+                objVisitHistory.push(news_token);
 
                 return userObj.updateOne({
                     "user_visit_history": objVisitHistory
@@ -34,7 +43,7 @@ class UserDetailDB {
                 if (userDetailObject === false) {
                     const newUserDetail = new UserDetail({
                         "user_id": user_object_id,
-                        "user_visit_history": {}
+                        "user_visit_history": []
                     });
 
                     return newUserDetail.save()

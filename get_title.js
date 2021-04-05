@@ -15,6 +15,7 @@ folderName.forEach(fold => {
 
     for (let ind = 0; ind < fileContent.length; ind++) {
       list_data.push({
+        "category": fold,
         "title": fileContent[ind]["title"],
         "url": fileContent[ind]["url"],
         "author": fileContent[ind]["author"],
