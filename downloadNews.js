@@ -41,14 +41,14 @@ function calldata(topic, startData, endDate, destincation) {
 }
 
 // calldata(
-//   "summer", '2021-03-01', '2021-03-25',
-//   "./static/news_file/othe/file1.json"
+//   "elon musk", '2021-04-01', '2021-04-29',
+//   "./static/news_file/tech/file5.json"
 // )
 
-// calldata(
-//   "corona", '2021-03-01', '2021-03-25',
-//   "./static/news_file/othe/file2.json"
-// )
+calldata(
+  "apple", '2021-04-01', '2021-04-29',
+  "./static/news_file/tech/file6.json"
+)
 
 // calldata(
 //   "russia", '2021-03-01', '2021-03-25',
