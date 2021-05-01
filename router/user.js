@@ -17,44 +17,43 @@ router.post("/auth/login", parseJsonInput,
 			}).catch(err => {
 				return res.json({
 					"statusCode": 400,
-					"data": err
+					"data": null
 				});
 			});
 	});
 
-router.post("/auth/registration", parseJsonInput,
-	(req, res, next) => {
-		return UserDB.createNewUser(req.body.username, req.body.email, req.body.password)
-			.then(creationResp => {
-				return UserDetailDB.createNewUserDetail(creationResp._id)
-					.then(detObj => {
-						return res.json({
-							"statusCode": 200,
-							"data": {
-								"user": creationResp,
-								"user_detail": detObj
-							}
-						});
-					})
-					.catch(err => {
-						console.log(err);
-						return res.json({
-							"statusCode": 400,
-							"data": err
-						});
-					});
-
-			}).catch(err => {
+router.post("/auth/registration", parseJsonInput, (req, res, next) => {
+	return UserDB.createNewUser(
+		req.body.username, req.body.email, req.body.password
+	).then(creationResp => {
+		return UserDetailDB.createNewUserDetail(creationResp._id)
+			.then(detObj => {
+				return res.json({
+					"statusCode": 200,
+					"data": {
+						"user": creationResp,
+						"user_detail": detObj
+					}
+				});
+			})
+			.catch(err => {
 				console.log(err);
 				return res.json({
 					"statusCode": 400,
 					"data": err
 				});
-			})
-	});
+			});
+
+	}).catch(err => {
+		console.log(err);
+		return res.json({
+			"statusCode": 400,
+			"data": err
+		});
+	})
+});
 
 
-// TODO: Add URL Parsing.
 router.get("/", (req, res, next) => {
 	// const userEmail = req.query.email;
 
@@ -62,7 +61,7 @@ router.get("/", (req, res, next) => {
 		.then(userData => {
 			if (userData === false) {
 				return res.json({
-					"statusCode": 200,
+					"statusCode": 400,
 					"data": null
 				});
 			}
@@ -80,7 +79,7 @@ router.get("/", (req, res, next) => {
 		.catch(err => {
 			return res.json({
 				"statusCode": 400,
-				"data": err
+				"data": null
 			});
 		})
 
@@ -88,6 +87,7 @@ router.get("/", (req, res, next) => {
 
 /**
  * Update User history after reading a new news
+ * @example
  * input format: 
  * {
  *  "user_email": String
@@ -114,7 +114,7 @@ router.post("/update", parseJsonInput, (req, res, next) => {
 					return res.json({
 						"statusCode": 200,
 						"updateStatus": true
-					}); 
+					});
 				})
 				.catch(err => {
 					return res.json({
