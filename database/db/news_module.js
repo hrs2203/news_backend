@@ -3,88 +3,87 @@ const NewsCategoryDB = require("./news_category_module.js");
 
 /** Static Function Class For News Model */
 class NewsDB {
-    static getAllNews() {
-        return News.find().select("news_title news_total_visits").then(data => data).catch(err => err);
-    }
 
-    static getNews(news_id) {
-        return News.findOne({ "_id": news_id })
-            .then(newsObj => (newsObj === null) ? false : newsObj)
-            .catch(err => err);
-    }
+  /**
+   * @returns List [ News_Object ]
+   */
+  static getAllNews() {
+    return News.find().select("news_title news_total_visits")
+      .then(data => data).catch(err => err);
+  }
 
-    static getNewsByCategory(news_category) {
-        return NewsCategoryDB.checkNewsCategoryPresence(news_category)
-            .then(category_obj => {
-                if (category_obj === false) [];
-                return News.find({ "news_category_id": category_obj._id })
-                    .select("news_title news_static_link news_total_visits")
-                    .then(newsList => newsList).catch(err => err);
-            }).catch(err => err);
-    }
+  /**
+   * 
+   * @param {String} news_id 
+   * @returns news_object || false || null
+   */
+  static getNews(news_id) {
+    return News.findOne({ "_id": news_id })
+      .then(newsObj => (newsObj === null) ? false : newsObj)
+      .catch(err => null);
+  }
 
-    static checkNewsPresence(news_id) {
-        return News.findOne({ "_id": news_id })
-            .then(newsObj => (newsObj === null) ? false : newsObj)
-            .catch(err => err)
-    }
+  /**
+   * 
+   * @param {String} news_category
+   * @returns List [ news_object ] with news_object.category = news_category
+   */
+  static getNewsByCategory(news_category) {
+    return NewsCategoryDB.checkNewsCategoryPresence(news_category)
+      .then(category_obj => {
+        if (category_obj === false) [];
+        return News.find({ "news_category_id": category_obj._id })
+          .select("news_title news_static_link news_total_visits")
+          .then(newsList => newsList).catch(err => err);
+      }).catch(err => err);
+  }
 
-    static incrementNewsVisitCount(news_id, increment_factor) {
-        return NewsDB.checkNewsPresence(news_id)
-            .then(newsObj => {
-                if (newsObj === false) {
-                    return ({
-                        "status": 400,
-                        "message": "Invalid News Catrgory Id"
-                    });
-                }
+  /**
+   * 
+   * @param {String} news_id 
+   * @returns news_object || false || null
+   */
+  static checkNewsPresence(news_id) {
+    return News.findOne({ "_id": news_id })
+      .then(newsObj => (newsObj === null) ? false : newsObj)
+      .catch(err => null)
+  }
 
-                return newsObj.updateOne({
-                    "news_total_visits": newsObj.news_total_visits + increment_factor
-                }).then(data => data).catch(err => err);
-            })
-            .catch(err => err)
-    }
-
-    static createNewNews(
-        newscategory,
-        newsauthor,
-        newstitle,
-        newsdescription,
-        newsurl,
-        newsurlToImage,
-        newspublishedAt,
-        newscontent,
-    ) {
-
-        return NewsCategoryDB.checkNewsCategoryPresence(newscategory)
-            .then(newCatObj => {
-
-                if (newCatObj === false) {
-                    return ({
-                        "status": 400,
-                        "message": "Invalid News Catrgory"
-                    })
-                }
-
-                const newNews = new News({
-                    "news_title": newstitle,
-                    "news_category_id": newCatObj._id,
-                    "news_author": newsauthor,
-                    "news_description": newsdescription,
-                    "news_url": newsurl,
-                    "news_urlToImage": newsurlToImage,
-                    "news_publishedAt": newspublishedAt,
-                    "news_content": newscontent,
-                });
-
-                return newNews.save()
-                    .then(data => data)
-                    .catch(err => err);
-
-            })
-            .catch(err => err)
-    }
+  /**
+   * create new news instance and add it to db.
+   * 
+   * @param {String} newscategory 
+   * @param {Object} news_object 
+   * @example
+   * news_object : {
+   *   newstitle : String,
+   *   newsauthor : String,
+   *   newsdescription : String,
+   *   newsurl : String,
+   *   newsurlToImage : String,
+   *   newspublishedAt : String,
+   *   newscontent : String,
+   * }
+   * 
+   * @returns news_instance
+   */
+  static createNewNews(newscategory, news_object) {
+    return NewsCategoryDB.checkNewsCategoryPresence(newscategory)
+      .then(newCatObj => {
+        if (newCatObj === false) return false;
+        const newNews = new News({
+          "news_title": news_object.newstitle,
+          "news_category_id": newCatObj._id,
+          "news_author": news_object.newsauthor,
+          "news_description": news_object.newsdescription,
+          "news_url": news_object.newsurl,
+          "news_urlToImage": news_object.newsurlToImage,
+          "news_publishedAt": news_object.newspublishedAt,
+          "news_content": news_object.newscontent,
+        });
+        return newNews.save().then(data => data).catch(err => err);
+      }).catch(err => null)
+  }
 
 }
 
