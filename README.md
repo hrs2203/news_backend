@@ -1,59 +1,114 @@
 # News Backend Code
 
-## DB Layer Details
-Connected to ead db in mongo::local
+## API Served
 
-## TODO List
-- [x] Design DB Layer Schema
-- [x] DB connection
-- [x] Design DB Layer Layer
-- [x] Router Layer
-- [ ] Authenticaion
-- [ ] API test in mocha
+<table>
+    <tr>
+        <th>No</th>
+        <th>Services Provided</th>
+        <th>API</th>
+    </tr>
+    <tr>
+        <td>1.</td>
+        <td>User Login</td>
+        <td>{url}/api/tbd</td>
+    </tr>
+    <tr>
+        <td>2.</td>
+        <td>User Registration</td>
+        <td>{url}/api/tbd</td>
+    </tr>
+    <tr>
+        <td>3.</td>
+        <td>Update User History</td>
+        <td>{url}/api/tbd</td>
+    </tr>
+    <tr>
+        <td>4.</td>
+        <td>Clean User History</td>
+        <td>{url}/api/tbd</td>
+    </tr>
+    <tr>
+        <td>5.</td>
+        <td>Fetch News</td>
+        <td>{url}/api/tbd</td>
+    </tr>
+    <tr>
+        <td>6.</td>
+        <td>Fetch News by News_Category</td>
+        <td>{url}/api/tbd</td>
+    </tr>
+    <tr>
+        <td>7.</td>
+        <td>Collect unseen queries</td>
+        <td>{url}/api/tbd</td>
+    </tr>
+    <tr>
+        <td>8.</td>
+        <td>serve data on unseen queries</td>
+        <td>{url}/api/tbd</td>
+    </tr>
+</table>
 
-### DB Layer
-1. User
-    - user id (autogen)
-    - username
-    - email
-    - password (encrypted)
 
-2. UserPreferences
-    - userPrefId
-    - userId (Foreign Key to User )
-    - visit history: (sorted by count value) {
-        "category id 1": count1,
-        "category id 2": count2,
-    }
+## Internal Services
 
-3. News Category
-    - newsCategory id
-    - newsCategory name
+1. Collection of data on unseen queries
+2. Present data to user in real time on unseen queries.
+3. Update search space for queries.
 
-4. News Article
-    - News Id
-    - News Title
-    - News Category id (Foreign Key to NewsCategory )
-    - News Total Visits
-    - News Static Link 
-        - ( Details stored in static file as json )
-    ----------------------
-    - News Body
-    - News Abstract
-    - News Publisher
-    ----------------------
-    
-
-
-
-
-### Router Layer
-- [ ] User Registrations
-- [ ] User Login
-- [ ] User Preferences
-- [ ] User Data Modification
-- [ ] News Category
-- [ ] News Data Model (Layer)
-- [ ] News Topic List
-- [ ] News Link (Topic Wise)
-
+## Division of work load
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Task</th>
+        <th>Status</th>
+    </tr>
+    <tr>
+        <td>Hrishabh Pandey</td>
+        <td>
+            <ol>
+                <li>Integration Between React and NodeJs Server.</li>
+                <li>Frontend State management and datasaving on client side using react js in browser.</li>
+                <li>News Collection and Scraping</li>
+            </ol>
+        </td>
+        <td>Completed</td>
+    </tr>
+    <tr>
+        <td>Sayam Kumar</td>
+        <td>
+            <ol>
+                <li>REST API routers to communicate withservices efficiently</li>
+                <li>Database Layer.</li>
+                <li>News Collection and Scraping</li>
+            </ol>
+        </td>
+        <td>Completed</td>
+    </tr>
+    <tr>
+        <td>Raahul Singh</td>
+        <td><ol>
+                <li>REST API routers to communicate withservices efficiently</li>
+                <li>Database Layer.</li>
+                <li>News Collection and Scraping</li>
+            </ol></td>
+        <td>Completed</td>
+    </tr>
+    <tr>
+        <td>Hemanth</td>
+        <td><ol>
+                <li>User Interface</li>
+                <li>News Collection and Scraping</li>
+            </ol></td>
+        <td>Incomplete</td>
+    </tr>
+    <tr>
+        <td>Harshini</td>
+        <td><ol>
+                <li>User Interface</li>
+                <li>News Collection and Scraping</li>
+            </ol></td>
+        <td>Incomplete</td>
+    </tr>
+</table>
