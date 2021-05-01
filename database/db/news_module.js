@@ -47,8 +47,14 @@ class NewsDB {
     }
 
     static createNewNews(
-        newstitle, newscategory,
-        newsstaticlink, newstotalvisits
+        newscategory,
+        newsauthor,
+        newstitle,
+        newsdescription,
+        newsurl,
+        newsurlToImage,
+        newspublishedAt,
+        newscontent,
     ) {
 
         return NewsCategoryDB.checkNewsCategoryPresence(newscategory)
@@ -64,8 +70,12 @@ class NewsDB {
                 const newNews = new News({
                     "news_title": newstitle,
                     "news_category_id": newCatObj._id,
-                    "news_static_link": newsstaticlink,
-                    "news_total_visits": newstotalvisits,
+                    "news_author": newsauthor,
+                    "news_description": newsdescription,
+                    "news_url": newsurl,
+                    "news_urlToImage": newsurlToImage,
+                    "news_publishedAt": newspublishedAt,
+                    "news_content": newscontent,
                 });
 
                 return newNews.save()

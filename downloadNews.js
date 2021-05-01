@@ -46,8 +46,8 @@ function calldata(topic, startData, endDate, destincation) {
 // )
 
 calldata(
-  "apple", '2021-04-01', '2021-04-29',
-  "./static/news_file/tech/file6.json"
+  "delhi covid", '2021-04-01', '2021-04-29',
+  "./static/news_file/tech/file7.json"
 )
 
 // calldata(

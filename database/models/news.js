@@ -9,12 +9,28 @@ const NewsSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  news_static_link: {
+  news_author: {
     type: String,
     required: true
   },
-  news_total_visits: {
-    type: Number,
+  news_description: {
+    type: String,
+    required: true
+  },
+  news_url: {
+    type: String,
+    required: true
+  },
+  news_urlToImage: {
+    type: String,
+    required: true
+  },
+  news_publishedAt: {
+    type: String,
+    required: true
+  },
+  news_content: {
+    type: String,
     required: true
   },
 });

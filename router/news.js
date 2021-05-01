@@ -40,10 +40,14 @@ router.get("/bycategory", (req, res, next) => {
 router.post("/add", parseJsonInput,
     (req, res, next) => {
         return NewsDB.createNewNews(
-            req.body.news_title,
-            req.body.news_category_name,
-            req.body.news_static_link,
-            0
+            req.body.newscategory,
+            req.body.newsauthor,
+            req.body.newstitle,
+            req.body.newsdescription,
+            req.body.newsurl,
+            req.body.newsurlToImage,
+            req.body.newspublishedAt,
+            req.body.newscontent,
         ).then(newsObject => {
             return res.json({
                 "statusCode": 200,
