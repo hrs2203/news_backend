@@ -1,38 +1,25 @@
-const news_search = require("../models/news_search.js");
+const News = require("../models/news.js");
+
 
 class NewsSearchDB {
 
   /**
    * entire search space
-   * @returns List[news_search]
+   * @returns List[News]
    */
   static getEntireSearch() {
-    return news_search.find().then(data => data).catch(err => [])
+    return News.find()
+      .select("news_title news_url news_publishedAt news_category_id")
+      .then(data => data).catch(err => [])
   }
 
   /**
+   * filter news from news_module itself
    * 
    * @param {String} news_title 
-   * @returns List[news_search]
+   * @returns List[News]
    */
   static searchNews(news_title) { }
-
-  /**
-   * Add new news search instance
-   * 
-   * @param {object} news_object
-   * @example
-   * {
-   *  news_title: String,
-   *  news_link: String,
-   *  news_time: String,
-   *  news_category: String,
-   * }
-   * @returns {boolean} if created ? true : false
-   */
-  static addNews(news_object) { }
-
-
 
 }
 

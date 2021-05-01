@@ -14,6 +14,15 @@ class UnseenQueryDB {
       data => ((data === null) ? false : true)
     ).catch(err => null)
   }
+
+  /**
+   * List of all present search queries
+   * 
+   * @returns List [ SearchObject ]
+   */
+  static getAllQuery(){
+    return UnseenQuery.find().then(data => data).catch(err => []);
+  }
   
   /**
    * Create new entry when needed

@@ -47,7 +47,7 @@ function calldata(topic, startData, endDate, destincation) {
 
 calldata(
   "delhi covid", '2021-04-01', '2021-04-29',
-  "./static/news_file/tech/file7.json"
+  "./static/news_file/tech/file1.json"
 )
 
 // calldata(
