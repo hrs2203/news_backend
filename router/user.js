@@ -4,7 +4,13 @@ const parseJsonInput = require("body-parser").json();
 const UserDB = require("../database/db/user_module.js");
 const UserDetailDB = require("../database/db/user_detail_module.js");
 
-
+/**
+ * @example
+ * {
+ * 	"email": "sample@gmail.com",
+ *  "password": "passowrd"
+ * }
+ */
 router.post("/auth/login", parseJsonInput,
 	(req, res, next) => {
 
@@ -22,6 +28,14 @@ router.post("/auth/login", parseJsonInput,
 			});
 	});
 
+/**
+ * @example
+ * {
+ * 	"username": "username",
+ * 	"email": "sample@gmail.com",
+ *  "password": "passowrd"
+ * }
+ */
 router.post("/auth/registration", parseJsonInput, (req, res, next) => {
 	return UserDB.createNewUser(
 		req.body.username, req.body.email, req.body.password
@@ -54,9 +68,11 @@ router.post("/auth/registration", parseJsonInput, (req, res, next) => {
 });
 
 
+/**
+ * {{url}}/api/user?userEmail=user1@gmail.com
+ */
 router.get("/", (req, res, next) => {
 	// const userEmail = req.query.email;
-
 	return UserDB.checkUserPresence(req.query.userEmail)
 		.then(userData => {
 			if (userData === false) {
@@ -119,7 +135,7 @@ router.post("/update", parseJsonInput, (req, res, next) => {
 				.catch(err => {
 					return res.json({
 						"statusCode": 400,
-						"data": err
+						"data": false
 					});
 				})
 
@@ -127,7 +143,7 @@ router.post("/update", parseJsonInput, (req, res, next) => {
 		.catch(err => {
 			return res.json({
 				"statusCode": 400,
-				"data": err
+				"data": false
 			});
 		})
 })
