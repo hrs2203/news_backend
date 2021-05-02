@@ -148,5 +148,46 @@ router.post("/update", parseJsonInput, (req, res, next) => {
 		})
 })
 
+/**
+ * clean User history
+ * @example
+ * input format: 
+ * {
+ *  "user_email": String
+ * } 
+ * }
+ */
+router.post("/clean_history", parseJsonInput, (req, res, next) => {
+	return UserDB.checkUserPresence(req.body.user_email)
+		.then(userObject => {
+			if (userObject === false) {
+				return res.json({
+					"statusCode": 200,
+					"data": null
+				})
+			}
+			return UserDetailDB.cleanUserHistory(userObject._id)
+				.then(userUpdateDetail => {
+					return res.json({
+						"statusCode": 200,
+						"updateStatus": true
+					});
+				})
+				.catch(err => {
+					return res.json({
+						"statusCode": 400,
+						"data": false
+					});
+				})
+
+		})
+		.catch(err => {
+			return res.json({
+				"statusCode": 400,
+				"data": false
+			});
+		})
+})
+
 
 module.exports = router;

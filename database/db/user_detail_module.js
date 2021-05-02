@@ -19,6 +19,7 @@ class UserDetailDB {
    * @param {Object} news_token
    * @returns neuly update user history
    * 
+   * @example
    * news_token: {
    *  "news_title": String,
    *  "news_link": String,
@@ -38,6 +39,23 @@ class UserDetailDB {
           "user_visit_history": objVisitHistory
         }).then(savedData => savedData).catch(err => err);
 
+      }).catch(err => err);
+  }
+
+
+  /**
+   * Clean User history for a fresh start
+   * 
+   * @param {String} user_obj_id 
+   */
+  static cleanUserHistory(user_obj_id){
+    return UserDetail.findOne({"user_id": user_obj_id})
+      .then(userObj => {
+        if (userObj === null) return false;
+        var objVisitHistory = [];
+        return userObj.updateOne({
+          "user_visit_history": objVisitHistory
+        }).then(savedData => savedData).catch(err => err);
       }).catch(err => err);
   }
 
