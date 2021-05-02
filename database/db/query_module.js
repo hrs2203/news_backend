@@ -1,4 +1,6 @@
 const UnseenQuery = require("../models/query.js");
+const CollectNewNews = require("./new_news_module.js");
+const NewsDB = require('../db/news_module.js');
 
 class UnseenQueryDB {
 
@@ -20,10 +22,10 @@ class UnseenQueryDB {
    * 
    * @returns List [ SearchObject ]
    */
-  static getAllQuery(){
+  static getAllQuery() {
     return UnseenQuery.find().then(data => data).catch(err => []);
   }
-  
+
   /**
    * Create new entry when needed
    * 
@@ -61,6 +63,45 @@ class UnseenQueryDB {
           return UnseenQuery.delete({ query: que }).then(resp => true).catch(err => false);
         }
       }).catch(err => null);
+  }
+
+  /**
+   * Fill the data base with new queries
+   */
+  static fillDatabase() {
+    return UnseenQueryDB.getAllQuery()
+      .then(query_list => {
+        query_list = query_list.map(item => item["query"]);
+
+        query_list.forEach(title => {
+          console.log(title);
+          CollectNewNews.getdata(title, '2021-04-15', '2021-04-30')
+            .then(news_list => {
+              news_list.forEach(nws => {
+                NewsDB.createNewNews(
+                  "othe",
+                  {
+                    "newsauthor": nws["author"] || "sample",
+                    "newstitle": nws["title"] || "sample",
+                    "newsdescription": nws["description"] || "sample",
+                    "newsurl": nws["url"] || "sample",
+                    "newsurlToImage": nws["urlToImage"] || "sample",
+                    "newspublishedAt": nws["publishedAt"] || "sample",
+                    "newscontent": nws["content"] || "sample"
+                  }
+                )
+              })
+            })
+            .catch(err => console.log(err))
+        })
+        return query_list;
+      })
+      .then(lst => {
+        return UnseenQuery.deleteMany({}).then(dt => {
+          return UnseenQueryDB.getAllQuery().then(data => data).catch(e => []);
+        })
+      })
+      .catch(err => console.log(err));
   }
 
 }
