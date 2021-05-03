@@ -8,7 +8,7 @@ class NewsDB {
    * @returns List [ News_Object ]
    */
   static getAllNews() {
-    return News.find().select("news_title news_total_visits")
+    return News.find().select("news_title")
       .then(data => data).catch(err => err);
   }
 
@@ -33,7 +33,6 @@ class NewsDB {
       .then(category_obj => {
         if (category_obj === false) [];
         return News.find({ "news_category_id": category_obj._id })
-          .select("news_title news_static_link news_total_visits")
           .then(newsList => newsList).catch(err => err);
       }).catch(err => err);
   }

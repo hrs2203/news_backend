@@ -32,7 +32,8 @@ router.get("/all", (req, res, next) => {
                         "news_title": seq[i]["news_title"],
                         "news_category": data[seq[i]["news_category_id"]] || "othe",
                         "news_url": seq[i]["news_url"],
-                        "news_publishedAt": seq[i]["news_publishedAt"]
+                        "news_publishedAt": seq[i]["news_publishedAt"],
+                        "news_author": seq[i]["news_author"]
                     })
                 }
                 return res.json({
@@ -50,6 +51,25 @@ router.get("/all", (req, res, next) => {
             return res.json({
                 "status": 400,
                 "data": null
+            })
+        })
+})
+
+/**
+ * {{url}}/api/search/unseenquery?q=delhi covid
+ */
+ router.get("/get", (req, res, next) => {
+    return UnseenQueryDB.getNewQuery(req.query.q)
+        .then(data => {
+            return res.json({
+                "status": 200,
+                "data": data
+            })
+        })
+        .catch(err => {
+            return res.json({
+                "status": 400,
+                "data": false
             })
         })
 })

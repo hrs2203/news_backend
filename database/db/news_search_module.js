@@ -9,7 +9,7 @@ class NewsSearchDB {
    */
   static getEntireSearch() {
     return News.find()
-      .select("news_title news_url news_publishedAt news_category_id")
+      .select("news_title news_url news_publishedAt news_category_id news_author")
       .then(data => data).catch(err => [])
   }
 

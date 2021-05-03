@@ -27,6 +27,19 @@ class UnseenQueryDB {
   }
 
   /**
+   * get new unseen query
+   * 
+   * @param {String} qury 
+   */
+  static getNewQuery(que) {
+    que = que.toLowerCase();
+    return CollectNewNews.getdata(que, '2021-04-15', '2021-04-30')
+      .then(data => data)
+      .catch(err => [])
+  }
+
+
+  /**
    * Create new entry when needed
    * 
    * @param {String} que
