@@ -1,3 +1,0 @@
-/**
- * Js Test using mocha
- */
