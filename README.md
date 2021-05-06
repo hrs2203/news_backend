@@ -11,42 +11,42 @@
     <tr>
         <td>1.</td>
         <td>User Login</td>
-        <td>{url}/api/tbd</td>
+        <td>{{url}}/api/user/auth/login</td>
     </tr>
     <tr>
         <td>2.</td>
         <td>User Registration</td>
-        <td>{url}/api/tbd</td>
+        <td>{{url}}/api/user/auth/registration</td>
     </tr>
     <tr>
         <td>3.</td>
         <td>Update User History</td>
-        <td>{url}/api/tbd</td>
+        <td>{{url}}/api/user/update</td>
     </tr>
     <tr>
         <td>4.</td>
         <td>Clean User History</td>
-        <td>{url}/api/tbd</td>
+        <td>{{url}}/api/user/clean_history</td>
     </tr>
     <tr>
         <td>5.</td>
         <td>Fetch News</td>
-        <td>{url}/api/tbd</td>
+        <td>{{url}}/api/news?nid=news_id</td>
     </tr>
     <tr>
         <td>6.</td>
         <td>Fetch News by News_Category</td>
-        <td>{url}/api/tbd</td>
+        <td>{{url}}/api/news/category?ncname=gov</td>
     </tr>
     <tr>
         <td>7.</td>
-        <td>Collect unseen queries</td>
-        <td>{url}/api/tbd</td>
+        <td>Collect Unseen queries</td>
+        <td>{{url}}/api/search/unseenquery?q=stock market</td>
     </tr>
     <tr>
         <td>8.</td>
         <td>serve data on unseen queries</td>
-        <td>{url}/api/tbd</td>
+        <td>{{url}}/api/search/get?q=new news</td>
     </tr>
 </table>
 
@@ -101,7 +101,7 @@
                 <li>User Interface</li>
                 <li>News Collection and Scraping</li>
             </ol></td>
-        <td>Incomplete</td>
+        <td>Complete</td>
     </tr>
     <tr>
         <td>Harshini</td>
@@ -109,6 +109,6 @@
                 <li>User Interface</li>
                 <li>News Collection and Scraping</li>
             </ol></td>
-        <td>Incomplete</td>
+        <td>Complete</td>
     </tr>
 </table>
