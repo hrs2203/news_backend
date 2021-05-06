@@ -1,4 +1,22 @@
-# News Backend Code
+# News Backend
+
+## About
+Morning Brew is a one stop news website serving its customers
+digestable short news personalized to there taste.
+As a backend service build on MERN Stack ( NodeJs, ExpressJs, MongoDB ),
+this module provides the server side support for the react js app.
+
+The Backend handels:
+
+1. Routing different url using express js
+2. Handelling route methods and api data type, parsin using express js
+3. Database layer schema creation using mongoose package
+4. databse data collection layer using mongoose
+5. User verfication and data enctryption using native nodejs
+6. Collection of unseen queries and data collection on them using third party API's such as
+    1. News API
+    2. New Youk time API
+
 
 ## API Served
 
@@ -51,12 +69,6 @@
 </table>
 
 
-## Internal Services
-
-1. Collection of data on unseen queries
-2. Present data to user in real time on unseen queries.
-3. Update search space for queries.
-
 ## Division of work load
 <table>
     <tr>
@@ -99,7 +111,6 @@
         <td>Hemanth</td>
         <td><ol>
                 <li>User Interface</li>
-                <li>News Collection and Scraping</li>
             </ol></td>
         <td>Complete</td>
     </tr>
@@ -107,7 +118,6 @@
         <td>Harshini</td>
         <td><ol>
                 <li>User Interface</li>
-                <li>News Collection and Scraping</li>
             </ol></td>
         <td>Complete</td>
     </tr>
